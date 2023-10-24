@@ -1,75 +1,36 @@
-# Nuxt 3 Minimal Starter
+## Web App With PWA
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+<!-- ![image](https://github.com/straufer/React-Spring-boot/blob/main/image-nuxtjs.png?raw=true) -->
 
-## Setup
+<p><img src="https://github.com/straufer/demo-pwa/blob/main/gambar/pertemuan_3/gambar_rev_1.png?raw=true"/></p>
+<p><img src="https://github.com/straufer/demo-pwa/blob/main/gambar/pertemuan_3/gambar_rev_2.png?raw=true"/></p>
+<p><img src="https://github.com/straufer/demo-pwa/blob/main/gambar/pertemuan_3/gambar2.png?raw=true"/></p>
+<p><img src="https://github.com/straufer/demo-pwa/blob/main/gambar/pertemuan_3/gambar3.png?raw=true"/></p>
 
-Make sure to install the dependencies:
+<details>
+    <summary>System Info</summary>
+    - OS: Ubuntu 22.04 LTS <br>
+    - Kernel: 6.2.0-34-generic <br>
+    - Shell: zsh 5.8.1 <br>
+    - CPU: Intel i3-4030U (4) @ 1.80GHz <br>
+    - GPU: AMD ATI Radeon HD 8550M <br>
+    - Memory: 4221MiB / 7828MiB <br>
+    - NodeJs 18.18.0 LTS <br>
+</details>
+<br>
 
-```bash
-# npm
-npm install
+- Dependecies
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+```json
+"@nuxt/devtools": "latest",
+"@nuxtjs/tailwindcss": "^6.8.0",
+"@vite-pwa/nuxt": "^0.1.1",
+"nuxt": "^3.7.4",
+"tailwindcss": "^3.3.3",
+"vue": "^3.3.4",
+"vue-router": "^4.2.5"
 ```
 
-## Development Server
+### Framework
 
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+<p><img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/nuxt-black-dashboard/opt_bd_nuxjs_thumbnail.jpg" /></p>
