@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import navbar from '../components/Header.vue';
 import { products } from '~/composables/constants/products';
+import copyright from '../components/Footer.vue';
 const selectedCategory = ref('');
 const allProducts = computed(() => {
   if (selectedCategory.value) {
@@ -28,4 +29,5 @@ const allProducts = computed(() => {
     <br />
     <br />
   </section>
+  <!-- <copyright /> -->
 </template>
