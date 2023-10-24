@@ -2,7 +2,7 @@
 
 <!-- ![image](https://github.com/straufer/React-Spring-boot/blob/main/image-nuxtjs.png?raw=true) -->
 
-<p><img src="https://github.com/straufer/demo-pwa/blob/main/gambar/pertemuan_3/gambar_rev_1.png?raw=true"/></p>
+<p><img src="https://github.com/SclayGT/OwlMart/blob/main/Gambar/Gambars1.jpeg?raw=true"/></p>
 <p><img src="https://github.com/straufer/demo-pwa/blob/main/gambar/pertemuan_3/gambar_rev_2.png?raw=true"/></p>
 <p><img src="https://github.com/straufer/demo-pwa/blob/main/gambar/pertemuan_3/gambar2.png?raw=true"/></p>
 <p><img src="https://github.com/straufer/demo-pwa/blob/main/gambar/pertemuan_3/gambar3.png?raw=true"/></p>
