@@ -1,6 +1,6 @@
 <template>
   <section>
-    <!-- <Header/> -->
+    <!-- <Header /> -->
     <slot />
     <Footer />
   </section>

@@ -1,58 +1,75 @@
-<script setup>
+<script lang="ts" setup>
 import navbar from '../components/Header.vue';
-import copyright from '../components/Footer.vue';
+import type { Products } from '~/types/products';
+const products = ref<Products[]>([]);
+const totalPrice = computed(() => {
+  return products.value
+    .filter((product) => product.price !== undefined)
+    .reduce((accumulator, currentValue) => accumulator + currentValue.price!, 0);
+});
+onMounted(() => {
+  let localStorageData = localStorage.getItem('products');
+  if (localStorageData) {
+    products.value = JSON.parse(localStorageData);
+  }
+});
+const removeCart = (id: number) => {
+  products.value = products.value.filter((item) => item.id !== id);
+  localStorage.setItem('products', JSON.stringify(products.value));
+};
 </script>
 
 <template>
-  <navbar />
-  <!-- Hero section with background image, heading, subheading and button -->
-  <div
-    class="relative overflow-hidden bg-cover bg-no-repeat"
-    style="
-      background-position: 50%;
-      background-image: url('https://tecdn.b-cdn.net/img/new/slides/146.webp');
-      height: 600px;
-    "
-  >
-    <div
-      class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
-      style="background-color: rgba(0, 0, 0, 0.75)"
-    >
-      <div class="flex h-full items-center justify-center">
-        <div class="px-6 text-center text-white md:px-12">
-          <h1 class="mb-6 text-5xl font-bold">Ini Halaman Cart</h1>
-          <!-- <h2 class="mb-6 text-5xl font-bold">Heading</h2>
-          <h3 class="mb-8 text-3xl font-bold">Subeading</h3> -->
-          <button
-            type="button"
-            class="inline-block rounded border-2 border-neutral-50 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-            data-te-ripple-init
-            data-te-ripple-color="light"
-          >
-            Get started
+  <section>
+    <navbar />
+    <div class="container">
+      <div class="py-10 flex gap-6">
+        <div class="w-[70%]">
+          <div class="flex justify-between items-center pb-7 border-b border- gray-300 mb-6">
+            <h1 class="text-3xl font-medium pl-8">Shopping Cart</h1>
+            <p class="text-3xl font-medium">{{ products.length }} Items</p>
+          </div>
+          <div v-if="products.length > 0" class="flex flex-col gap-6">
+            <template v-for="(item, index) in products" :key="index">
+              <CardsCardCart :product="item" @removeCart="removeCart" />
+            </template>
+          </div>
+          <div v-else>
+            <h5 class="text-xl font-light text-center">Cart is empty</h5>
+          </div>
+        </div>
+        <div class="w-[30%] bg-white shadow-xl h-max p-6">
+          <h3 class="text-xl font-medium mb-6">Order Summary</h3>
+          <div class="flex flex-col gap-3 border-b border-gray-300 pb-4">
+            <div v-if="products.length > 0">
+              <div v-for="(item, index) in products" :key="index" class="flex gap-4 items-center">
+                <span class="text-limit limit-1 text-sm">{{ item.name }}</span>
+                <span class="text-sm font-semibold">${{ item.price }}</span>
+              </div>
+            </div>
+            <div v-else>
+              <p class="text-sm text-center font-light">There are no to orders yet</p>
+            </div>
+          </div>
+          <div class="pt-4 flex items-center justify-between mb-6">
+            <span class="text-base">Total</span>
+            <span class="text-base font-bold">${{ totalPrice }}</span>
+          </div>
+          <button class="bg-blue-600 text-white text-base font-bold w-full py-2 rounded-lg">
+            Checkout
           </button>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- <br />
-  <br />
-  <br />
-  <br />
-  <br /> -->
-  <!-- <br />
-  <br /><br />
-  <br /> -->
-  <!-- <br /> -->
-  <!-- <br />
-  <br />
-  <br />
-  <br /><br />
+  </section>
   <br />
   <br />
   <br />
   <br />
-  <br /> -->
-  <!-- <copyright /> -->
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
 </template>

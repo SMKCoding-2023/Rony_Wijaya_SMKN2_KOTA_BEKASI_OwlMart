@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import navbar from '../components/Header.vue';
 import { products } from '~/composables/constants/products';
-import copyright from '../components/Footer.vue';
 const selectedCategory = ref('');
 const allProducts = computed(() => {
   if (selectedCategory.value) {
@@ -10,12 +9,18 @@ const allProducts = computed(() => {
   return products;
 });
 </script>
+
 <template>
   <section>
     <navbar />
     <div class="container">
       <div class="py-10">
         <div class="mb-8 flex justify-end gap-6">
+          <NuxtLink
+            to="/category/create"
+            class="bg-orange-500 text-white flex justify- center items-center px-3 rounded-lg"
+            >Create Category</NuxtLink
+          >
           <Dropdown @selected-category="selectedCategory = $event" />
         </div>
         <div class="flex gap-10 flex-wrap ml-28">
@@ -29,5 +34,4 @@ const allProducts = computed(() => {
     <br />
     <br />
   </section>
-  <!-- <copyright /> -->
 </template>

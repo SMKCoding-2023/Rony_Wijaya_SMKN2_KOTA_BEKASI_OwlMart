@@ -1,22 +1,22 @@
 export const category: Category[] = [
-    {
+  {
     id: 1,
-    name: "Jam",
-    },
-    {
+    name: 'Jam',
+  },
+  {
     id: 2,
-    name: "Sepatu",
-    },
-    {
+    name: 'Sepatu',
+  },
+  {
     id: 3,
-    name: "Celana",
-    },
-    {
+    name: 'Celana',
+  },
+  {
     id: 4,
-    name: "Baju",
-    },
-    ]
-    export interface Category {
-    id? : number,
-    name?: string,
-    }
+    name: 'Baju',
+  },
+];
+export interface Category {
+  id?: number;
+  name?: string;
+}
