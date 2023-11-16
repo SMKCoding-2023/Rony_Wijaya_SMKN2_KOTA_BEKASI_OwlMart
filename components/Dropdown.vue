@@ -1,10 +1,26 @@
 <script lang="ts" setup>
 import { category } from '~/composables/constants/category';
+import { useCategoryStore } from '~/stores/category';
 const isShow = ref(false);
-defineEmits(['selectedCategory']);
+// defineEmits(["selectedCategory"]);
+
+const categoryStore = useCategoryStore();
+const { categories } = storeToRefs(categoryStore);
+categoryStore.getAllCategory();
+
+const selectedCategory = ref('');
+
+const emit = defineEmits(['selectedCategory']);
+
+const selectCategory = (categoryName: string) => {
+  isShow.value = true;
+  selectedCategory.value = categoryName;
+  emit('selectedCategory', categoryName);
+};
 </script>
+
 <template>
-  <div class="relative select-none pr-10">
+  <div class="relative select-none">
     <div
       class="border border-primary flex items-center justify-center px-3 py-2 rounded-lg gap-4 cursor-pointer w-full"
       @click="isShow = !isShow"
@@ -26,15 +42,17 @@ defineEmits(['selectedCategory']);
           <span
             class="block px-4 py-2 hover:bg-primary hover:text-white transition duration-200 cursor-pointer"
             @click="$emit('selectedCategory', '')"
-            >All</span
           >
+            All
+          </span>
         </li>
-        <li v-for="(item, index) in category" :key="index">
+        <li v-for="(category, index) in categories" :key="index" :value="category.name">
           <span
             class="block px-4 py-2 hover:bg-primary hover:text-white transition duration-200 cursor-pointer"
-            @click="$emit('selectedCategory', item.name)"
-            >{{ item?.name }}</span
+            @click="selectCategory(category.name)"
           >
+            {{ category.name }}
+          </span>
         </li>
       </ul>
     </div>

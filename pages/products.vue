@@ -1,62 +1,66 @@
-<script setup>
-import navbar from '../components/Header.vue';
-import copyright from '../components/Footer.vue';
+<script lang="ts" setup>
+import { useProductsStore } from '~/stores/products';
+
+const productStore = useProductsStore();
+const allProducts = ref([]);
+
+productStore.getAllProducts().then(() => {
+  allProducts.value = productStore.products;
+});
+
+const selectedCategory = ref('');
+
+const categoryStore = useCategoryStore();
+const { categories } = storeToRefs(categoryStore);
+categoryStore.getAllCategory();
+
+const sortListProduct = computed(() => {
+  if (!selectedCategory.value) {
+    return allProducts.value;
+  } else {
+    // ignore the fkin error here !
+    return allProducts.value.filter((product) => product.category === selectedCategory.value);
+  }
+});
+
+// TODO
+// 1. sorting a list product on dropdwn components
+// 2. fix the undefined variable, (problem: get value variable didnt declared scope)
+// 3. detail product showed on path variable by id
 </script>
 
 <template>
-  <navbar />
-  <!-- Hero section with background image, heading, subheading and button -->
-  <div
-    class="relative overflow-hidden bg-cover bg-no-repeat"
-    style="
-      background-position: 50%;
-      background-image: url('https://tecdn.b-cdn.net/img/new/slides/146.webp');
-      height: 600px;
-    "
-  >
-    <div
-      class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
-      style="background-color: rgba(0, 0, 0, 0.75)"
-    >
-      <div class="flex h-full items-center justify-center">
-        <div class="px-6 text-center text-white md:px-12">
-          <h1 class="mb-6 text-5xl font-bold">Ini Halaman Product</h1>
-          <!-- <h2 class="mb-6 text-5xl font-bold">Heading</h2>
-          <h3 class="mb-8 text-3xl font-bold">Subeading</h3> -->
-          <button
-            type="button"
-            class="inline-block rounded border-2 border-neutral-50 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-            data-te-ripple-init
-            data-te-ripple-color="light"
-          >
-            <nuxt-link
-              to="/IsiProduct"
-              class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
-              >Get started</nuxt-link
+  <div class="header">
+    <Header />
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="ml-20 pt-5">
+        <h1 class="text-4xl font-bold pt-7">Products</h1>
+        <div class="pl-20">
+          <div class="mb-6 flex justify-end gap-6 pl-20">
+            <NuxtLink
+              to="/category/create"
+              class="bg-slate-700 text-white flex justify- center items-center px-3 rounded-lg hover:bg-slate-500"
+              >Create New Category</NuxtLink
             >
-          </button>
+            <NuxtLink
+              to="/product/create"
+              class="bg-green-200 text-green-700 flex justify-center items-center px-3 rounded-lg border border-green-700 hover:bg-green-500 hover:text-white"
+              >Create Products</NuxtLink
+            >
+            <Dropdown @selected-category="selectedCategory = $event" />
+          </div>
+          <div class="flex gap-6 flex-wrap mx-auto">
+            <template v-for="(item, index) in sortListProduct" :key="index">
+              <CardsCardProduct :product="item" class="w-[calc(100%/4-18px)]" />
+            </template>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- <br />
-  <br />
-  <br />
-  <br />
-  <br /> -->
-  <!-- <br />
-  <br /><br />
-  <br /> -->
-  <!-- <br /> -->
-  <!-- <br />
-  <br />
-  <br />
-  <br /><br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br /> -->
-  <!-- <copyright /> -->
+  <div class="footer mt-auto p-20"></div>
 </template>

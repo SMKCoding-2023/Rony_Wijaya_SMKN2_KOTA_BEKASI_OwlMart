@@ -1,18 +1,24 @@
 <script lang="ts" setup>
-import navbar from '../components/Header.vue';
-import type { Products } from '~/types/products';
-const products = ref<Products[]>([]);
+import { ProductsType } from '~/types/ProductsType';
+import navbar from '~/components/Header.vue';
+import footer from '~/components/Footer.vue';
+
+document.title = 'Cart';
+
+const products = ref<ProductsType[]>([]);
 const totalPrice = computed(() => {
   return products.value
     .filter((product) => product.price !== undefined)
     .reduce((accumulator, currentValue) => accumulator + currentValue.price!, 0);
 });
+
 onMounted(() => {
   let localStorageData = localStorage.getItem('products');
   if (localStorageData) {
     products.value = JSON.parse(localStorageData);
   }
 });
+
 const removeCart = (id: number) => {
   products.value = products.value.filter((item) => item.id !== id);
   localStorage.setItem('products', JSON.stringify(products.value));
@@ -20,13 +26,14 @@ const removeCart = (id: number) => {
 </script>
 
 <template>
+  <navbar />
+
   <section>
-    <navbar />
     <div class="container">
       <div class="py-10 flex gap-6">
         <div class="w-[70%]">
           <div class="flex justify-between items-center pb-7 border-b border- gray-300 mb-6">
-            <h1 class="text-3xl font-medium pl-8">Shopping Cart</h1>
+            <h1 class="text-3xl font-medium">Shopping Cart</h1>
             <p class="text-3xl font-medium">{{ products.length }} Items</p>
           </div>
           <div v-if="products.length > 0" class="flex flex-col gap-6">
@@ -55,21 +62,15 @@ const removeCart = (id: number) => {
             <span class="text-base">Total</span>
             <span class="text-base font-bold">${{ totalPrice }}</span>
           </div>
-          <button class="bg-blue-600 text-white text-base font-bold w-full py-2 rounded-lg">
+          <button
+            class="bg-slate-700 text-white text-base font-bold w-full py-2 rounded-lg hover:bg-slate-500"
+          >
             Checkout
           </button>
         </div>
       </div>
     </div>
   </section>
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
+
+  <footer />
 </template>
