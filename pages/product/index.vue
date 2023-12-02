@@ -20,7 +20,7 @@ import copyright from '../components/Footer.vue';
     >
       <div class="flex h-full items-center justify-center">
         <div class="px-6 text-center text-white md:px-12">
-          <h1 class="mb-6 text-5xl font-bold">Ini Halaman Home</h1>
+          <h1 class="mb-6 text-5xl font-bold">Selamat Datang</h1>
           <!-- <h2 class="mb-6 text-5xl font-bold">Heading</h2>
           <h3 class="mb-8 text-3xl font-bold">Subeading</h3> -->
           <button

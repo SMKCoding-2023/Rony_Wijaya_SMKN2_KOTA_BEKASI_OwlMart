@@ -2,13 +2,13 @@
 import { useAuthStore } from '~/stores/auth';
 
 const authStore = useAuthStore();
-const isLoading = ref(false);
-const isShowAlert = ref(false);
 const isSuccess = ref(false);
 const message = ref('');
+const isShowAlert = ref(false);
+const isLoading = ref(false);
 const router = useRouter();
 
-const login = ref([
+const register = ref([
   {
     name: 'email',
     label: 'Email',
@@ -27,14 +27,14 @@ const login = ref([
   },
 ]);
 
-const submitLogin = async () => {
+const submitRegister = async () => {
   isLoading.value = true;
   const result: { [key: string]: string } = {};
-  login.value.forEach((item) => {
+  register.value.forEach((item) => {
     result[item.name] = item.value;
   });
 
-  await authStore.login(result);
+  await authStore.register(result);
 
   if (!authStore.status) {
     isSuccess.value = authStore.status;
@@ -46,6 +46,7 @@ const submitLogin = async () => {
     message.value = authStore.message;
     isShowAlert.value = true;
     isLoading.value = false;
+
     router.push({
       path: '/product',
     });
@@ -55,13 +56,13 @@ const submitLogin = async () => {
 
 <template>
   <div
-    class="w-full max-w-sm p-4 bg-white rounded-lg shadow-[0_30px_60px_rgba(0,0,0,0.15)] sm:p-6 md:p-8"
+    class="w-full max-w-sm p-4 bg-white rounded-lg sm:p-6 md:p-8 shadow-[0_30px_60px_rgba(0,0,0,0.15)]"
   >
-    <form class="" @submit.prevent="submitLogin">
+    <form class="" @submit.prevent="submitRegister">
       <div class="mb-6">
-        <h5 class="text-2xl font-medium text-gray-900 mb-2">Login</h5>
+        <h5 class="text-2xl font-medium text-gray-900 mb-2">Register</h5>
         <span class="text-sm font-normal text-gray-500"
-          >Sign in to continue to our application</span
+          >Create an account to start using our application</span
         >
       </div>
       <div
@@ -73,7 +74,7 @@ const submitLogin = async () => {
       >
         {{ message }}
       </div>
-      <div v-for="(item, index) in login" :key="index" class="mb-6">
+      <div v-for="(item, index) in register" :key="index" class="mb-6">
         <label :for="item.name" class="block mb-2 text-sm font-medium text-gray-900">{{
           item.label
         }}</label>
@@ -91,7 +92,7 @@ const submitLogin = async () => {
         type="submit"
         class="w-full flex justify-center items-center text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6"
       >
-        <span v-if="!isLoading">Login to your account</span>
+        <span v-if="!isLoading">Sign up to your account</span>
         <div v-else role="status">
           <svg
             aria-hidden="true"
@@ -113,8 +114,8 @@ const submitLogin = async () => {
         </div>
       </button>
       <div class="text-sm font-medium text-gray-500">
-        Don't have an Account ?
-        <NuxtLink to="/register" class="text-blue-700 hover:underline">Sign up</NuxtLink>
+        Already have an Account ?
+        <NuxtLink to="/login" class="text-blue-700 hover:underline">Sign in</NuxtLink>
       </div>
     </form>
   </div>
