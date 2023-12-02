@@ -12,6 +12,9 @@
 <p><img src="https://github.com/SclayGT/OwlMart/blob/main/Gambar/Gambar9.png?raw=true"/></p>
 <p><img src="https://github.com/SclayGT/OwlMart/blob/main/Gambar/Gambar10N.png?raw=true"/></p>
 <p><img src="https://github.com/SclayGT/OwlMart/blob/main/Gambar/Gambar11.png?raw=true"/></p>
+<p><img src="https://github.com/SclayGT/OwlMart/blob/main/Gambar/Gambar12.png"/></p>
+<p><img src="https://github.com/SclayGT/OwlMart/blob/main/Gambar/Gambar13.png"/></p>
+<p><img src="https://github.com/SclayGT/OwlMart/blob/main/Gambar/Gambar%2014.png"/></p>
 
 <details>
     <summary>System Info</summary>
